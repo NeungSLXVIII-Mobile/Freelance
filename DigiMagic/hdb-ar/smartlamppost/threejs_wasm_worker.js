@@ -69,38 +69,65 @@ var p3_show = false;
 // var p1_human5_path = 'assets/sprites/1/05_Human/05_Human';
 // var p1_human6_path = 'assets/sprites/1/06_Human/06_Human';
 // var p1_icon_path = 'assets/sprites/1/Part01_Icon/Part01_Icon';
-var p1_bicycle_path = 'assets/sprites/1/Bicycle_15fps/Bicycle_15fps';
-var p1_human2_path = 'assets/sprites/1/Human01_15fps/Human01_15fps';
-var p1_human3_path = 'assets/sprites/1/Human02_15fps/Human02_15fps';
-var p1_human4_path = 'assets/sprites/1/Human03_15fps/Human03_15fps';
+// var p1_bicycle_path = 'assets/sprites/1/Bicycle_15fps/Bicycle_15fps';
+// var p1_human2_path = 'assets/sprites/1/Human01_15fps/Human01_15fps';
+// var p1_human3_path = 'assets/sprites/1/Human02_15fps/Human02_15fps';
+// var p1_human4_path = 'assets/sprites/1/Human03_15fps/Human03_15fps';
+// var p1_human5_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+// var p1_human6_path = 'assets/sprites/1/Human05_15fps/Human05_15fps';
+//var p1_icon_path = 'assets/sprites/1/Part01_Icon/Part01_Icon';
+var p1_bicycle_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p1_human2_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p1_human3_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p1_human4_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
 var p1_human5_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
-var p1_human6_path = 'assets/sprites/1/Human05_15fps/Human05_15fps';
-var p1_icon_path = 'assets/sprites/1/Part01_Icon/Part01_Icon';
+var p1_human6_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p1_icon_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
 //P2.
-var p2_human1_path = 'assets/sprites/2/Human01_v2/Human01_v2';
-var p2_human2_path = 'assets/sprites/2/Human02_v2/Human02_v2';
-var p2_human3_path = 'assets/sprites/2/Human03_v2/Human03_v2';
-var p2_human4_path = 'assets/sprites/2/Human04_v2/Human04_v2';
-var p2_human5_path = 'assets/sprites/2/Human05_v2/Human05_v2';
-var p2_icon_path = 'assets/sprites/2/PART02_Icon/PART02_Icon';
+// var p2_human1_path = 'assets/sprites/2/Human01_v2/Human01_v2';
+// var p2_human2_path = 'assets/sprites/2/Human02_v2/Human02_v2';
+// var p2_human3_path = 'assets/sprites/2/Human03_v2/Human03_v2';
+// var p2_human4_path = 'assets/sprites/2/Human04_v2/Human04_v2';
+// var p2_human5_path = 'assets/sprites/2/Human05_v2/Human05_v2';
+var p2_human1_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p2_human2_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p2_human3_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p2_human4_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p2_human5_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
+var p2_icon_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
 // P3.
-var p3_icon_path = 'assets/sprites/3/PART03_Icon/PART03_Icon';
+//var p3_icon_path = 'assets/sprites/3/PART03_Icon/PART03_Icon';
+var p3_icon_path = 'assets/sprites/1/Human04_15fps/Human04_15fps';
 
 // P1.
-var p1_bicycle_frame_count = 67;
-var p1_human2_frame_count = 131;
-var p1_human3_frame_count = 151;
-var p1_human4_frame_count = 163;
+// var p1_bicycle_frame_count = 67;
+// var p1_human2_frame_count = 131;
+// var p1_human3_frame_count = 151;
+// var p1_human4_frame_count = 163;
+// var p1_human5_frame_count = 179;
+// var p1_human6_frame_count = 138;
+// var p1_icon_frame_count = 77;
+// var p2_human1_frame_count = 223;
+// var p2_human2_frame_count = 251;
+// var p2_human3_frame_count = 271;
+// var p2_human4_frame_count = 298;
+// var p2_human5_frame_count = 229;
+// var p2_icon_frame_count = 77;
+// var p3_icon_frame_count = 77;
+var p1_bicycle_frame_count = 179;
+var p1_human2_frame_count = 179;
+var p1_human3_frame_count = 179;
+var p1_human4_frame_count = 179;
 var p1_human5_frame_count = 179;
-var p1_human6_frame_count = 138;
-var p1_icon_frame_count = 77;
-var p2_human1_frame_count = 223;
-var p2_human2_frame_count = 251;
-var p2_human3_frame_count = 271;
-var p2_human4_frame_count = 298;
-var p2_human5_frame_count = 229;
-var p2_icon_frame_count = 77;
-var p3_icon_frame_count = 77;
+var p1_human6_frame_count = 179;
+var p1_icon_frame_count = 179;
+var p2_human1_frame_count = 179;
+var p2_human2_frame_count = 179;
+var p2_human3_frame_count = 179;
+var p2_human4_frame_count = 179;
+var p2_human5_frame_count = 179;
+var p2_icon_frame_count = 179;
+var p3_icon_frame_count = 179;
 
 var p1_bicycle_frame = 0;
 var p1_bicycle_duration = 0;
@@ -1843,8 +1870,8 @@ function loadAllTexture() {
         }
         p1_icon_textures = [];
         for (count = 0; count < p1_icon_frame_count; count++) {
-            //p1_icon_textures[count] = new THREE.TextureLoader().load(p1_icon_path + zero_path(count) + count + '.png');
-            p1_icon_textures[count] = new THREE.TextureLoader().load(p1_icon_path + '_' + count + '.png');
+            p1_icon_textures[count] = new THREE.TextureLoader().load(p1_icon_path + zero_path(count) + count + '.png');
+            //p1_icon_textures[count] = new THREE.TextureLoader().load(p1_icon_path + '_' + count + '.png');
         }
 
         // P2.
@@ -1870,15 +1897,15 @@ function loadAllTexture() {
         }
         p2_icon_textures = [];
         for (count = 0; count < p2_icon_frame_count; count++) {
-            //p2_icon_textures[count] = new THREE.TextureLoader().load(p2_icon_path + zero_path(count) + count + '.png');
-            p2_icon_textures[count] = new THREE.TextureLoader().load(p2_icon_path + '_' + count + '.png');
+            p2_icon_textures[count] = new THREE.TextureLoader().load(p2_icon_path + zero_path(count) + count + '.png');
+            //p2_icon_textures[count] = new THREE.TextureLoader().load(p2_icon_path + '_' + count + '.png');
         }
 
         // P3.
         p3_icon_textures = [];
         for (count = 0; count < p3_icon_frame_count; count++) {
-            //p3_icon_textures[count] = new THREE.TextureLoader().load(p3_icon_path + zero_path(count) + count + '.png');
-            p3_icon_textures[count] = new THREE.TextureLoader().load(p3_icon_path + '_' + count + '.png');
+            p3_icon_textures[count] = new THREE.TextureLoader().load(p3_icon_path + zero_path(count) + count + '.png');
+            //p3_icon_textures[count] = new THREE.TextureLoader().load(p3_icon_path + '_' + count + '.png');
         }
     }
 }
