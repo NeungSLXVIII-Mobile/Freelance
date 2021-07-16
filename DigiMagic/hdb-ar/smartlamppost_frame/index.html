@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Urban Water Harvesting System (UWHS)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
+	<link rel="stylesheet" href="css/video-style.css">
+	<script src="js/third_party/three.js/stats.min.js"></script>
+	<script src="js/third_party/three.js/three.min.js"></script>
+	<script src="js/third_party/three.js/GLTFLoader.js"></script>
+	<script src="js/SpriteAnimator.js"></script>
+	<script src="threejs_wasm_worker.js"></script>
+	<script src="js/third_party/three.js/OrbitControls.js"></script>
+	<script src="js/third_party/threex.js/threex.videotexture.js"></script>
+
+	<style>
+		.cycling-header {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 10%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.close-app-icon {
+			position: absolute;
+			width: auto;
+			height: 5.5%;
+			top: 0%;
+			right: 0%;
+		}
+
+		.finger360-icon {
+			position: absolute;
+			width: auto;
+			height: 7%;
+			top: 10%;
+			left: 50%;
+			transform: translate(220%, -50%);
+			display: none;
+		}
+
+		.cycling-description {
+			position: absolute;
+			width: auto;
+			height: 35%;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.start-btn {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 75%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+		}
+
+		.next-btn {
+			position: absolute;
+			height: 8%;
+			top: 70%;
+			top: 90%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			display: none;
+		}
+
+		.choice1-btn {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 90%;
+			left: 50%;
+			transform: translate(-150%, -50%);
+			z-index: 2;
+			display: none;
+		}
+
+		.choice2-btn {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 90%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			display: none;
+		}
+
+		.choice3-btn {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 90%;
+			left: 50%;
+			transform: translate(50%, -50%);
+			z-index: 2;
+			display: none;
+		}
+
+		.instruct-page {
+			position: absolute;
+			width: auto;
+			height: 80%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.proceed-btn {
+			position: absolute;
+			width: auto;
+			height: 8%;
+			top: 75%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+		}
+
+		.tools {
+			position: relative;
+			color: rgb(255, 255, 255);
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 1000;
+			display: none;
+		}
+	</style>
+
+</head>
+
+<body class="loading" style="background-color:#0c8188;">
+
+	<div id="loading" style="display: none;">
+		<img src="Data/logo.gif" />
+		<span class="loading-text">Loading, please wait</span>
+	</div>
+
+	<!--
+  ==================
+  STATS
+  ==================
+  -->
+
+	<div id="stats" class="ui stats" style="display: none;">
+		<div id="stats1" class="stats-item">
+			<p class="stats-item-title">
+				Main
+			</p>
+		</div>
+		<div id="stats2" class="stats-item">
+			<p class="stats-item-title">
+				Worker
+			</p>
+		</div>
+	</div>
+
+
+	<!--
+  ==================
+  CAMERA VIDEO & CANVAS
+  ==================
+  -->
+
+	<div id="app">
+		<video loop autoplay muted playsinline id="video">
+		</video>
+
+		<!-- <video id="p1_bicycle_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/01_Color.mp4" style="display: none;"></video>
+		<video id="p1_human2_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p1_human3_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/01_Color.mp4" style="display: none;"></video>
+		<video id="p1_human4_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p1_human5_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p1_human6_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p1_icon_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+
+		<video id="p2_human1_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p2_human2_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p2_human3_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/01_Color.mp4" style="display: none;"></video>
+		<video id="p2_human4_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p2_human5_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p2_rain_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p2_icon_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+
+		<video id="p3_human1_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p3_human2_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p3_human3_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/01_Color.mp4" style="display: none;"></video>
+		<video id="p3_human4_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p3_human5_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video>
+		<video id="p3_icon_video" playsinline webkit-playsinline muted loop autoplay width="200" height="200" src="video/02_Color.mp4" style="display: none;"></video> -->
+
+		<canvas id="canvas"></canvas>
+
+	</div>
+
+	<!--
+		<a
+          href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg"
+          class="ui marker"
+          target="_blank">
+          🖼 Marker Image
+      </a>
+	 -->
+
+	<div id="firstPage" style="display: block;">
+		<img class="cycling-description" id="cycling-description" src="assets/images/description_1.png">
+		<img class="start-btn" id="start-btn" src="assets/images/start_btn.png" onclick="clickStartBtn()" />
+	</div>
+
+	<div id="instructPage" style="display: none;">
+		<img src="assets/images/uwsh_instruction_page.png" class="instruct-page" id="instruct-page">
+		<img src="assets/images/proceed_btn.png" class="proceed-btn" id="proceed-btn" onclick="clickProceedBtn()">
+	</div>
+
+	<img class="close-app-icon" id="close-app-icon" src="assets/images/close_app_btn.png" onclick="clickCloseApp()">
+
+	<img class="finger360-icon" id="finger360-icon" src="assets/images/finger360_icon.png">
+
+	<img class="cycling-header" id="cycling-header" src="assets/images/recycling_header.png">
+	<!--<img class="next-btn" id="next-btn" src="assets/images/next_btn.png" onclick="clickNextBtn()">-->
+
+	<img class="choice1-btn" id="choice1-btn" src="assets/images/finger360_icon.png" onclick="choice1_worker()">
+	<img class="choice2-btn" id="choice2-btn" src="assets/images/finger360_icon.png" onclick="choice2_worker()">
+	<img class="choice3-btn" id="choice3-btn" src="assets/images/finger360_icon.png" onclick="choice3_worker()">
+
+	<!--for debug-->
+	<div class="tools">
+		<br>
+		<label>scale</label>
+		<input type="range" min="1" max="100" value="50" class="slider" id="slide_scale">
+		<label id="scale_lbl">1</label>
+		<br>
+		<br>
+		<label>position x</label>
+		<input type="range" min="-1000" max="1000" value="1" class="slider" id="slide_px">
+		<label id="px_lbl">1</label>
+		<br>
+		<br>
+		<label>position y</label>
+		<input type="range" min="-1000" max="1000" value="1" class="slider" id="slide_py">
+		<label id="py_lbl">1</label>
+		<br>
+		<br>
+		<label>angle</label>
+		<input type="range" min="-90" max="90" value="0" class="slider" id="slide_angle">
+		<label id="angle_lbl">1</label>
+	</div>
+
+	<script>
+
+		/*
+				//for tools
+				var slider_scale = document.getElementById("slide_scale");
+				var slider_lbl =  document.getElementById("scale_lbl");
+				slider_lbl.innerHTML = 1;
+				slider_scale.oninput = function(){
+					slider_lbl.innerHTML = this.value/50;
+					adjust_scale = this.value/50;
+				}
+		
+				var slider_px = document.getElementById("slide_px");
+				var px_lbl =  document.getElementById("px_lbl");
+				px_lbl.innerHTML = 0;
+				slider_px.oninput = function(){
+					px_lbl.innerHTML = this.value;
+					adjust_px = this.value/10;
+				}
+		
+				var slider_py = document.getElementById("slide_py");
+				var py_lbl =  document.getElementById("py_lbl");
+				py_lbl.innerHTML = 0;
+				slider_py.oninput = function(){
+					py_lbl.innerHTML = this.value;
+					adjust_py= this.value/10;
+				}
+		
+				var slider_angle = document.getElementById("slide_angle");
+				var angle_lbl =  document.getElementById("angle_lbl");
+				angle_lbl.innerHTML = slider_angle.value;
+				slider_angle.oninput = function(){
+					angle_lbl.innerHTML = this.value;
+					adjust_angle = this.value;
+				}
+		
+		*/
+
+
+		/**
+		 * STATS
+		 */
+		var statsMain = new Stats();
+		statsMain.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+		document.getElementById('stats1').appendChild(statsMain.dom);
+
+		var statsWorker = new Stats();
+		statsWorker.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+		document.getElementById('stats2').appendChild(statsWorker.dom);
+
+		/**
+		 * APP / ELEMENTS
+		 */
+		var container = document.getElementById('app');
+		var video = document.getElementById('video');
+		var canvas = document.getElementById('canvas');
+
+		function clickCloseApp() {
+			window.location = "https://go.gov.sg/pns-commlivingroom";
+		};
+
+		function clickStartBtn() {
+			console.log("click start btn...");
+			document.getElementById("firstPage").style.display = "none";
+			document.getElementById("instructPage").style.display = "block";
+		}
+
+		function clickProceedBtn() {
+			console.log("click proceed btn...");
+			document.getElementById("instructPage").style.display = "none";
+			//document.getElementById("next-btn").style.display = "block";
+			document.getElementById("choice1-btn").style.display = "block";
+			document.getElementById("choice2-btn").style.display = "block";
+			document.getElementById("choice3-btn").style.display = "block";
+			document.getElementById("finger360-icon").style.display = "block";
+			openCamera();
+		}
+
+
+		var step = 1;
+
+		function clickNextBtn() {
+			console.log("click next btn...");
+
+			if (step === 1) {
+				plane_1.visible = false;
+				plane_2.visible = true;
+				main_animate_1.visible = false;
+				main_animate_2.visible = true;
+				plane_top_1.visible = false;
+				plane_top_2.visible = true;
+				step = 2;
+				console.log("step 1");
+			} else if (step === 2) {
+				plane_2.visible = false;
+				plane_3.visible = true;
+				main_animate_2.visible = false;
+				main_animate_3.visible = true;
+				step = 4;
+				document.getElementById("next-btn").style.display = "none";
+				console.log("step 2");
+			} else if (step === 3) {
+				/*plane_3.visible = false;
+				plane_1.visible = true;
+				main_animate_3.visible = false;
+				main_animate_1.visible = true;
+				plane_top_1.visible = true;
+				plane_top_2.visible = false;*/
+
+				step = 4;
+				console.log("step 3");
+			}
+		}
+
+
+
+		/**
+		 * APP / VIDEO STREAM
+		 */
+
+
+		function openCamera() {
+
+			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+				var hint = {
+					audio: false,
+					video: true
+				};
+
+				/*var hint = {
+					audio: false,
+					video:  {
+							facingMode: 'environment',
+							//width: { min: width, max: width }
+						},
+				};*/
+
+				/*var hint = {};
+					if (isMobile()) {
+						console.log("isMobile");
+						hint = {
+							facingMode: { "ideal": "environment" },
+							audio: false,
+							video: {
+								width: { min: 240, max: 240 },
+								height: { min: 360, max: 360 },
+							},
+						};
+					}*/
+
+				var width = (window.innerWidth < window.innerHeight) ? 240 : 320;//portrait
+				var height = (window.innerWidth < window.innerHeight) ? 320 : 240;//landscape
+
+				var aspectRatio = window.innerWidth / window.innerHeight;
+				console.log("aspectRatio: " + aspectRatio);
+				console.log(width, height);
+
+				hint = {
+					audio: false,
+					video: {
+						facingMode: 'environment',
+						width: { min: width, max: width }
+						//height: { min: height , max: height  },
+					},
+				};
+
+				console.log("hint: " + hint);
+
+				/*if (window.innerWidth < 800) {
+					var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
+					var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
+	
+					var aspectRatio = window.innerWidth / window.innerHeight;
+	
+					console.log(width, height);
+	
+					hint = {
+						audio: false,
+						video: {
+							facingMode: 'environment',
+							width: { min: width, max: width }
+						},
+					};
+	
+					console.log("hint: " + hint);
+				}*/
+
+				navigator.mediaDevices.getUserMedia(hint).then(function (stream) {
+					video.srcObject = stream;
+					video.addEventListener('loadedmetadata', function () {
+						video.play();
+
+						console.log('video', video, video.videoWidth, video.videoHeight);
+
+						start(
+							container,
+							markers['pinball'],
+							video,
+							video.videoWidth,
+							video.videoHeight,
+							canvas,
+							function () {
+								statsMain.update()
+							},
+							function () {
+								statsWorker.update();
+							},
+							null
+						);
+					});
+				});
+			}
+
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>
